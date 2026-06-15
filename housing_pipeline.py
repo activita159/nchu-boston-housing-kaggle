@@ -9,7 +9,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.datasets import fetch_openml
+from sklearn.datasets import fetch_openml, fetch_california_housing
 from sklearn.model_selection import train_test_split, cross_val_score, GridSearchCV
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LinearRegression, Ridge, Lasso, ElasticNet
@@ -55,6 +55,19 @@ def load_data(cfg):
         feature_names = data_cfg.get('feature_columns', [c for c in df.columns if c != target_col])
         if not feature_names:
             feature_names = [c for c in df.columns if c != target_col]
+    elif source == 'sklearn':
+        sklearn_name = data_cfg.get('sklearn_name', 'california_housing')
+        sklearn_fetchers = {
+            'california_housing': fetch_california_housing,
+        }
+        if sklearn_name not in sklearn_fetchers:
+            raise ValueError(f"Unsupported sklearn dataset: {sklearn_name}")
+        print(f"Fetching dataset from sklearn: '{sklearn_name}'...")
+        ds = sklearn_fetchers[sklearn_name](as_frame=True)
+        df = ds.data
+        target_col = data_cfg.get('target_column', 'MedHouseVal')
+        df[target_col] = ds.target
+        feature_names = list(ds.feature_names)
     else:
         raise ValueError(f"Unsupported data source: {source}")
 

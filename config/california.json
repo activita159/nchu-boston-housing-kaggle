@@ -1,0 +1,35 @@
+{
+  "project_name": "California Housing",
+  "project_slug": "california-housing",
+  "data": {
+    "source": "sklearn",
+    "sklearn_name": "california_housing",
+    "target_column": "MedHouseVal",
+    "target_display": "MedHouseVal",
+    "target_desc": "Median house value for California districts in $100,000s",
+    "target_unit": "$100,000s",
+    "dataset_source": "sklearn fetch_california_housing",
+    "dataset_desc": "20,640 California census block groups"
+  },
+  "visualization": {
+    "top_features_count": 4
+  },
+  "training": {
+    "test_size": 0.2,
+    "random_state": 42,
+    "cv_folds": 5
+  },
+  "models": {
+    "rf_tune": {
+      "n_estimators": [100, 200, 300],
+      "max_depth": [10, 15, 20, null],
+      "min_samples_split": [2, 5],
+      "min_samples_leaf": [1, 2]
+    }
+  },
+  "output": {
+    "dir": "output/california",
+    "submission_id_col": "ID",
+    "submission_target_col": "MedHouseVal"
+  }
+}
