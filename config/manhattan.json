@@ -1,0 +1,35 @@
+{
+  "project_name": "Manhattan Housing",
+  "project_slug": "manhattan-housing",
+  "data": {
+    "source": "csv",
+    "csv_path": "data/manhattan.csv",
+    "target_column": "price",
+    "target_display": "Price",
+    "target_desc": "Median home sale price in Manhattan",
+    "target_unit": "$",
+    "dataset_source": "NYC Open Data",
+    "dataset_desc": "Manhattan residential property sales"
+  },
+  "visualization": {
+    "top_features_count": 4
+  },
+  "training": {
+    "test_size": 0.2,
+    "random_state": 42,
+    "cv_folds": 5
+  },
+  "models": {
+    "rf_tune": {
+      "n_estimators": [100, 200, 300],
+      "max_depth": [5, 10, 15, null],
+      "min_samples_split": [2, 5],
+      "min_samples_leaf": [1, 2]
+    }
+  },
+  "output": {
+    "dir": "output/manhattan",
+    "submission_id_col": "ID",
+    "submission_target_col": "price"
+  }
+}

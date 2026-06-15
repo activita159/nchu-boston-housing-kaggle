@@ -1,0 +1,37 @@
+{
+  "project_name": "Boston Housing",
+  "project_slug": "boston-housing",
+  "data": {
+    "source": "openml",
+    "openml_name": "boston",
+    "openml_version": 1,
+    "target_column": "MEDV",
+    "target_display": "MEDV",
+    "target_desc": "Median value of owner-occupied homes in $1000s",
+    "target_unit": "$1000s",
+    "dataset_source": "OpenML #531",
+    "dataset_desc": "506 census tracts, Boston area"
+  },
+  "visualization": {
+    "fit_line_features": ["RM", "LSTAT"],
+    "top_features_count": 4
+  },
+  "training": {
+    "test_size": 0.2,
+    "random_state": 42,
+    "cv_folds": 5
+  },
+  "models": {
+    "rf_tune": {
+      "n_estimators": [100, 200, 300],
+      "max_depth": [5, 10, 15, null],
+      "min_samples_split": [2, 5],
+      "min_samples_leaf": [1, 2]
+    }
+  },
+  "output": {
+    "dir": "output/boston",
+    "submission_id_col": "ID",
+    "submission_target_col": "MEDV"
+  }
+}
