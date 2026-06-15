@@ -15,12 +15,13 @@ python housing_pipeline.py --config config/boston.json
 
 ### 步驟 1 — 載入資料
 
-支援兩種資料來源：
+支援三種資料來源（由設定檔 `data.source` 決定）：
 
 | 來源 | 設定鍵值 | 範例 |
 |------|----------|------|
-| OpenML | `data.source: "openml"` | Boston Housing (`openml_name: "boston"`) |
-| CSV | `data.source: "csv"` | 本地檔案 (`csv_path: "data/tokyo.csv"`) |
+| OpenML | `"openml"` + `openml_name` | Boston Housing |
+| sklearn | `"sklearn"` + `sklearn_name` | California Housing |
+| CSV | `"csv"` + `csv_path` | 本地檔案 (e.g. `data/tokyo.csv`) |
 
 ### 步驟 2 — 探索性資料分析（EDA）與視覺化
 
@@ -104,16 +105,17 @@ project/
 ├── housing_pipeline.py            # 主管線（讀取設定檔）
 ├── generate_poster.py             # 海報生成器（讀取設定檔）
 ├── config/
-│   ├── boston.json                # Boston 房價設定檔
-│   └── tokyo.json                 # 其他城市設定檔（使用者自行建立）
+│   ├── boston.json                # OpenML 來源範例
+│   ├── california.json            # sklearn 來源範例
+│   ├── manhattan.json             # CSV 來源範例
+│   └── {custom}.json              # 使用者自行建立的新城市
 ├── output/
-│   ├── boston/
-│   │   ├── images/
-│   │   └── submission.csv
-│   └── tokyo/
+│   └── {city}/
 │       ├── images/
 │       └── submission.csv
 ├── README.md
 ├── report.md
 └── workflow.md
 ```
+
+> 檔案樹中的 `{city}` 和 `{custom}` 為佔位符，對應你設定檔中 `output.dir` 和設定的城市名稱。
